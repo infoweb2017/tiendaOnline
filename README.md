@@ -1,12 +1,14 @@
-# PHP - PDO + MVC
-Ejemplo en PHP con el paradigma orientado a objetos
+#Practica Examen Extraordinario
+
 ## Descripción
-Sistema de agenda de clientes desarrollado en PHP utilizando la librería Datatables para el manejo de datos.
+Preparación exámen extraordinario de DWS, trabajando con un inicio sesión y con una tabla cliente
+mostrarndo la tabla haciendo un CRUD de dicha tabla, que toma los datos de una base de datos, 
+también mostrando y creando archivos JSON,RSS,CSV respectivamente.
 
 ## Frameworks utilizados
 * [Datatables](https://datatables.net/) - Tablas dinámicas de datos
 * [Bootstrap](http://getbootstrap.com/) - Bootstrap Library for frontend design
 
 ## Authors
-* **Miguel Vega** - *Universidad Científica del Sur* 
-* **Victor Sotomayor** - *Universidad Científica del Sur*
+* **Frank Riesco Mozo** - *Alumno de DAW - CEEDCV* 
+* **Paco Aldarias** - *Profesor de DWS - CEEDCV*
