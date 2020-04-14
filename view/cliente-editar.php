@@ -26,9 +26,9 @@
                 <br>
                 <label>Telefono</label><input type="text" size="50" name="Telefono" value="<?php echo $cliente->Telefono; ?>" class="form-control" placeholder="Ingrese su telefono" required>
                 <br>
-                <label>Usuario</label><input type="text" size="50" name="Telefono" value="<?php echo $cliente->usuario; ?>" class="form-control" placeholder="Ingrese su usuario" required>
+                <label>Usuario</label><input type="text" size="50" name="usuario" value="<?php echo $cliente->usuario; ?>" class="form-control" placeholder="Ingrese su usuario" required>
                 <br>
-                <label>Password</label><input type="password" size="50" name="Telefono" value="<?php echo $cliente->password; ?>" class="form-control" placeholder="Ingrese su contraseña" required>
+                <label>Password</label><input type="password" size="50" name="password" value="<?php echo $cliente->password; ?>" class="form-control" placeholder="Ingrese su contraseña" required>
             </div>
             <hr />
 

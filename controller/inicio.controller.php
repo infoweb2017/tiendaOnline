@@ -2,7 +2,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/model/cliente.php';
+require_once 'C:/xampp/htdocs/frankriescodwsextra/model/cliente.php';
 
 class inicioController{
     private $model;
@@ -11,22 +11,24 @@ class inicioController{
         $this->model = new cliente();
     }
     public function nuevoRegistro(){
-        require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/view/signup.php';
+        require_once 'C:/xampp/htdocs/frankriescodwsextra/view/signup.php';
     }
     public function Index(){
-        require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/view/header.php';
+        require_once 'C:/xampp/htdocs/frankriescodwsextra/view/header.php';
     }
     public function Inicio(){
-        require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/view/login.php';
+        require_once 'C:/xampp/htdocs/frankriescodwsextra/view/login.php';
     }
     public function Salir(){
        // header("Location:../index.php");
-        header("Location:C:/xampp/htdocs/alumno_2019/frankriescodwsextra/controller/logout.php");
+        header("Location:C:/xampp/htdocs/frankriescodwsextra/controller/logout.php");
     }
     public function Volver(){
         header("Location:../web/inicio.php");
     }
-    
+    public function IniciarPage(){
+        header("Location:../web/inicio.php");
+    }
     public function GuardarNuevoCliente() {
         $cliente = new cliente();
        
@@ -36,7 +38,7 @@ class inicioController{
 
         $cliente->id > 0 ?: $this->model->RegistrarClusuario($cliente) ;
                  
-        header('Location:index.php');
+        header('Location:../index.php');
     }
     
     public function documentacion(){

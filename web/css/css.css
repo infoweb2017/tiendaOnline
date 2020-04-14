@@ -39,6 +39,7 @@ label{
 
 /*Campos del formulario*/
 input[type="text"],
+input[type="email"],
 input[type="password"]{
     border:none;
     border-radius: 6px;
@@ -62,7 +63,8 @@ input[type="reset"]{
     margin-right: auto;
     margin-top: -10px;
     text-align: center;
-    width:60px;
+    width: 70px;
+    height: 25;
 }
 .btn{
     display: inline-block;
@@ -78,7 +80,7 @@ input[type="button"]{
     margin-right: auto;
     margin-top: -10px;
     text-align: center;
-
+ width:60px;
 }
 input[type="submit"]{
     background-color:#A3A0A2;
@@ -86,11 +88,12 @@ input[type="submit"]{
     border-radius: 6px;
     color: white;
     font-size: 0.8em;
-    margin-left: 35%;
+    margin-left: 30%;
     margin-right: auto;
     margin-top: -10px;
     text-align: center;
-    width:60px;
+    width: 70px;
+    height: 25;
 }
 input[type="button"]:hover{
     cursor: pointer;

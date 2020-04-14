@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 //require_once '../model/cliente.php';
-require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/model/cliente.php';
+require_once 'C:/xampp/htdocs/frankriescodwsextra/model/cliente.php';
 
 class clienteController {
 
@@ -16,14 +16,14 @@ class clienteController {
     }
 
     public function IndexCliente() {
-        require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/view/header.php';
+        require_once 'C:/xampp/htdocs/frankriescodwsextra/view/header.php';
         //require_once '../view/header.php';
-        require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/view/cliente_mostrar.php';
+        require_once 'C:/xampp/htdocs/frankriescodwsextra/view/cliente_mostrar.php';
     }
 
     public function Salir() {
         // header("Location:../index.php");
-        header("Location:../controller/logout.php");
+        header("Location:../view/logout.php");
     }
 
     public function Volver() {

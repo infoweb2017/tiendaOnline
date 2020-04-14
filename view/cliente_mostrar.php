@@ -36,6 +36,7 @@
                         <td><?php echo $r->Correo; ?></td>
                         <td><?php echo $r->Telefono; ?></td>
                         <td><?php echo $r->usuario; ?></td>
+                         
                         <td>
                             <a  class="btn btn-warning" href="?c=cliente&a=CrudCliente&id=<?php echo $r->id; ?>">Actualizar</a>
                         </td>
@@ -69,7 +70,7 @@
                 </tr>
             </table>
         </div>
-        <a class="btn btn-primary pull-right" onclick="javascript:return confirm('¿Seguro que quiere salir?');"href="?c=inicio&a=Salir">Cerrar Sesión</a>
+        <a class="btn btn-primary pull-right" onclick="javascript:return confirm('¿Seguro que quiere salir?'); "href="?c=cliente&a=Salir">Cerrar Sesión</a>
         <br>
     </body>
     <script 

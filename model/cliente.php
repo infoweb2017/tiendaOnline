@@ -104,7 +104,7 @@ class cliente {
 
     public function EliminarCl($id) {
         try {
-            $stm = $this->pdo->prepare("DELETE FROM cliente WHERE id = ?");
+            $stm = $this->pdo->prepare("DELETE FROM cliente WHERE id= ?");
             $stm->execute(array($id));
         } catch (Exception $e) {
             die($e->getMessage());
@@ -127,6 +127,7 @@ class cliente {
             $this->pdo->prepare($sql)
                     ->execute(
                             array(
+                                $data->id,
                                 $data->dni,
                                 $data->Nombre,
                                 $data->Apellido,
@@ -134,7 +135,6 @@ class cliente {
                                 $data->Telefono,
                                 $data->usuario,
                                 $data->password,
-                                $data->id,
                             )
             );
         } catch (Exception $e) {
@@ -142,7 +142,7 @@ class cliente {
         }
     }
 
-    public function RegistrarClusuario(){
+    public function RegistrarClusuario($data){
         try {
             $sql = "INSERT INTO cliente (usuario,password) 
 		        VALUES (?, ?)";
