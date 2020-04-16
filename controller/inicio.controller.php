@@ -32,6 +32,7 @@ class inicioController{
     public function GuardarNuevoCliente() {
         $cliente = new cliente();
        
+        
         $cliente->usuario  = $_REQUEST['usuario'];
         $cliente->password = $_REQUEST['password'];
 

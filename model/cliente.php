@@ -114,6 +114,7 @@ class cliente {
     public function ActualizarCl($data) {
         try {
             $sql = "UPDATE cliente SET 
+                        
 			dni        = ?,
 			Nombre     = ?, 
 			Apellido   = ?,
@@ -161,12 +162,13 @@ class cliente {
     
     public function RegistrarCl(cliente $data) {
         try {
-            $sql = "INSERT INTO cliente (dni,Nombre,Apellido,Correo,Telefono,usuario,password) 
-		        VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO cliente (id,dni,Nombre,Apellido,Correo,Telefono,usuario,password) 
+		        VALUES (?,?, ?, ?, ?, ?, ?, ?)";
 
             $this->pdo->prepare($sql)
                     ->execute(
                             array(
+                                $data->id,
                                 $data->dni,
                                 $data->Nombre,
                                 $data->Apellido,

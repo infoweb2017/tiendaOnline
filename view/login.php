@@ -1,7 +1,19 @@
 <?php
+session_start();
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+/*
+  if(isset($_COOKIE['usuario'])){ 
+    // Caduca en un año 
+    setcookie('usuario', $_COOKIE['usuario'] + 1, time() + 365 * 24 * 60 * 60); 
+    $mensaje = 'Número de visitas: ' . $_COOKIE['usuario']; 
+  } else { 
+    // Caduca en un año 
+    setcookie('usuario', 1, time() + 365 * 24 * 60 * 60); 
+    $mensaje = 'Bienvenido a nuestra página web'; 
+  } */
 
 // Si han aceptado la política
 if (isset($_REQUEST['politica-cookies'])) {

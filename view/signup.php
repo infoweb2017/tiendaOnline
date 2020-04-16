@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -19,8 +20,8 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['usua
     //$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     //$statment->bindValue(':password', $password);
 
-   
-    if ($_POST['password'] == $_POST['confirm_password']) {
+ 
+   if ($_POST['password'] == $_POST['confirm_password']) {
             
         if ($statment->execute()) {
             $message = "<p style='color:blue'>Usuario creado con éxito <h2 style='text-align: center'><b> ---> ".$_POST['usuario']." <---</b></h2></p>";
