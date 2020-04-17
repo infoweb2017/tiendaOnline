@@ -6,15 +6,15 @@ require_once 'C:/xampp/htdocs/frankriescodwsextra/model/database.php';
 $cliente  = new cliente();
 $result = $cliente->ListarCl();
 
-$file = '../ficheros/cliente.csv';
+$json_string = json_encode($result);
+
+$file = '../ficheros/cliente.json';
 $fp = fopen($file, 'w');
-foreach ($result as $fields) {
-    if(is_object($fields))
-        $fields = (array) $fields;
-    fputcsv($fp, $fields);
-}
+
+fwrite($fp, $json_string);
 ob_clean();
 fclose($fp);
-header('Location: '.$file);
-?>
+header('Content-Type: application/json');
+readfile($file);
 
+?>

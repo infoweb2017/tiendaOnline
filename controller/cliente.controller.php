@@ -6,7 +6,7 @@ ini_set('display_errors', '1');
 
 //require_once '../model/cliente.php';
 require_once 'C:/xampp/htdocs/frankriescodwsextra/model/cliente.php';
-
+require_once 'C:/xampp/htdocs/frankriescodwsextra/templates/fichero_modificacion.php';
 class clienteController {
 
     private $model;
@@ -44,16 +44,30 @@ class clienteController {
 /* Guardar clientes */
     public function GuardarCliente() {
         $cliente = new cliente();
+        $fichero = new ficheros();
+        
+        if(isset($_REQUEST['usuario']) == $cliente->usuario){
+            echo "Usuario ya existe. <br>";
+        }
+        if(isset($_REQUEST['Telefono']) == $cliente->Telefono){
+            echo "Telefono ya exsite en un usuario.<br>";
+        }
+        if(isset($_REQUEST['dni']) == $cliente->dni){
+            echo "Dni ya es de un usuario<br>";
+        }
 
+           
         $cliente->id       = $_REQUEST['id'];
-        $cliente->dni      = $_REQUEST['dni'];
-        $cliente->Nombre   = $_REQUEST['Nombre'];
+        $fichero->validarDni($cliente->dni      = $_REQUEST['dni']);
+        $fichero->validarNombre($cliente->Nombre   = $_REQUEST['Nombre']);
         $cliente->Apellido = $_REQUEST['Apellido'];
-        $cliente->Correo   = $_REQUEST['Correo'];
-        $cliente->Telefono = $_REQUEST['Telefono'];
+        $fichero->validarEmail($cliente->Correo   = $_REQUEST['Correo']);
+        $fichero->validarTelefono($cliente->Telefono = $_REQUEST['Telefono']);
         $cliente->usuario  = $_REQUEST['usuario'];
         $cliente->password = $_REQUEST['password'];
 
+        
+        
 
         $cliente->id > 0 
                 ? $this->model->ActualizarCl($cliente) 
@@ -70,14 +84,13 @@ class clienteController {
 //------------------------------------------------------------------------------    
     /* Crea el JSON y lo muestra */
     public function ver_jsonCliente() {
-        $result = $this->model->jsonCl();
-        require_once ('../templates/json_Cliente.php');
+        header("Location: ../templates/json_cliente.php");
     }
 
 /* Crea el RSS y lo muestra */
     public function ver_rssCliente() {
-        $result = $this->model->rssCl();
-        header("Location: ../templates/rss_Cliente.php");
+        $result = $this->model->rss();
+        header("Location: ../ficheros/cliente.rss");
         
     }
 
@@ -96,13 +109,11 @@ class clienteController {
     public function verJson() {
         $result = $this->model->jsonCl();
     }
-
-    /* Muestra el RSS creado */
-    public function verRSS() {
+    public function verRSS(){
         $result = $this->model->rssCl();
-        header('Location: controladorCliente.php');
+        include_once('../templates/rss_Cliente.php');
     }
-    
+ 
 //------------------------------------------------------------------------------
     /* Cogemos en un array todos los id de los clientes. */
     public function comprobar_id_cliente() {

@@ -23,9 +23,9 @@ class ficheros {
         $patronNom = "/^[aA-zZ]{3,29}$/";
 
         if (preg_match($patronNom, $nombre)) {
-            echo "Nombre válido: " . $nombre;
-        } elseif ($nombre == "") {
+           if ($nombre == "") {
             echo "ERROR!!.Debe introducir un nombre válido.";
+           }
         }
     }
 
@@ -36,15 +36,15 @@ class ficheros {
 
 //Function verificar email
     function verificarEmail($email) {
-        $email = $_REQUEST["email"];
+        $email = $_REQUEST["Correo"];
 
         $patronEmail = '/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})+$/';
 
         if (preg_math($patronEmail, $email)) {
-            echo "Email válido : " . $email;
-        } elseif ($email == "") {
+           if ($email == "") {
             echo "<p class=\"aviso\">ERROR!!.Debe introducir un email</p>\n";
-        }
+           }
+        } 
     }
 
 //funcion validar telefono
@@ -55,10 +55,10 @@ class ficheros {
         $expresion = '/^[9|6|7][0-9]{8}$/';
 
         if (preg_match($expresion, $telefono)) {
-            echo "Teléfono válido: " . $telefono;
-        } elseif ($telefono == "") {
+           if ($telefono == "") {
             echo "<p class=\"aviso\">ERROR!!.Debe introducir un número de teléfono</p>\n";
-        }
+           }
+        } 
     }
 
 //funcion para recuperar password
@@ -80,7 +80,7 @@ class ficheros {
 
 //Funcion para validar DNI
     function validarDni($dni) {
-        //$dni = $_REQUEST['dni'];
+        $dni = $_REQUEST['dni'];
 
         if (strlen($dni) < 9) {
             return "DNI demasiado corto.";

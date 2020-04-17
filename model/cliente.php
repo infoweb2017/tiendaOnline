@@ -37,7 +37,7 @@ class cliente {
 //Obtenemos los clientes por id
     public function ObtenerCl($id) {
         try {
-            $stm = $this->pdo->prepare("SELECT * FROM cliente WHERE id = ?");
+            $stm = $this->pdo->prepare("SELECT * FROM cliente WHERE id= ? ORDER BY DESC");
             $stm->execute(array($id));
             return $stm->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
@@ -143,7 +143,7 @@ class cliente {
         }
     }
 
-    public function RegistrarClusuario($data){
+    public function RegistrarClusuario($data) {
         try {
             $sql = "INSERT INTO cliente (usuario,password) 
 		        VALUES (?, ?)";
@@ -159,7 +159,7 @@ class cliente {
             die($e->getMessage());
         }
     }
-    
+
     public function RegistrarCl(cliente $data) {
         try {
             $sql = "INSERT INTO cliente (id,dni,Nombre,Apellido,Correo,Telefono,usuario,password) 
@@ -184,7 +184,7 @@ class cliente {
     }
 
     public function obtener() {
-        $resultSet = $this->pdo->prepare("SELECT * FROM cliente");
+        $resultSet = $this->pdo->prepare("SELECT * FROM cliente ORDER BY id DESC");
         $resultSet->execute();
 
         $cliente = array();
@@ -193,7 +193,6 @@ class cliente {
             $cliente[] = $data;
         }
         return $cliente;
-        
     }
 
     public function jsonCl() {
@@ -207,50 +206,36 @@ class cliente {
             while ($data = $resultSet->fetchAll(PDO::FETCH_OBJ)) {
                 $cliente[] = $data;
             }
-            echo json_encode($cliente);
+            //Creamos json
+            $cliente['cliente'] = $cliente;
+            $json_string = json_encode($cliente);
             echo "<br>";
+            echo $json_string;
+            
+            //crear archivo json
+            $file = '../ficheros/cliente.json';
+            file_put_contents($file, $json_string);
+            echo "<br>";
+            
+            
         } catch (Exception $ex) {
             die($ex->getMessage());
         }
     }
 
-    public function rssCl() {
+    public function rssCl (){
         try {
             $resultSet = $this->pdo->prepare("SELECT * FROM cliente");
             $resultSet->execute();
-
-            $rss = "<?xml version='1.0' encoding='UTF-8'?>\n";
-            $rss .= "<rss version='2.0'>\n";
-            $rss .= "<Clientes>\n";
-
-            $rss .= "<title>Clientes</title>\n<description>Tabla Clientes</description>\n<language>es-ES</language>\n";
-            //$cliente = array();
-            $data = $resultSet->fetchAll(PDO::FETCH_OBJ);
-
-            foreach ($data as $item) {
-
-                $rss .= "<item>\n";
-                $rss .= "<dni>" . $item->dni . "</dni>\n";
-                $rss .= "<nombre>" . $item->Nombre . "</nombre>\n";
-                $rss .= "<apellido>" . $item->Apellido . "</apellido>\n";
-                $rss .= "<correo>" . $item->Correo . "</correo>\n";
-                $rss .= "<telefono>" . $item->Telefono . "</telefono>\n";
-                $rss .= "<usuario>" . $item->usuario . "</usuario>\n";
-                $rss .= "<password>" . $item->password . "</password>\n";
-                $rss .= "</item>\n";
-            }
-            $rss .= "</Clientes>\n</rss>";
-
-            $file = '../ficheros/cliente.rss';
-            $fp = fopen($file, 'r');
-            fwrite($fp, $rss);
-
-            fclose($fp);
-            header('Content-Type: text/xml');
-           // echo $rss;
-            readfile($file);
-        } catch (Exception $ex) {
             
+            while ($data = $resultSet->fetchAll(PDO::FETCH_OBJ)) {
+                $cliente[] = $data;
+            }
+            
+            $cliente['Cliente'] = $cliente;
+           
+        } catch (Exception $ex) {
+            die($ex->getMessage());
         }
     }
 
@@ -270,10 +255,47 @@ class cliente {
             $linea++;
 
             for ($columna = 0; $columna < $num; $columna++) {
-                echo $datos[$columna] . "\n";
+                echo $datos[$columna] . "<br>";
             }
         }
         fclose($archivo);
+    }
+    public function rss() {
+        include_once '../templates/rss_Cliente.php';
+        //$cliente = simplexml_load_file(file_get_contents("C:/xampp/htdocs/frankriescodwsextra/ficheros/cliente.rss"));
+        $resultSet = $this->pdo->prepare("SELECT * FROM cliente");
+        $resultSet->execute();
+
+        $cliente = $resultSet->fetchAll(PDO::FETCH_OBJ);
+        
+        $num_noticia = 1;
+        $max_noticias = 50;
+        
+        echo "<h2>{$cliente->channel->title}</h2>";
+        
+        foreach ($cliente->channel->Cliente->item as $noticia){
+            
+            echo "<article>";
+                $fecha = date("d/m/Y - H:i", strtotime($noticia->pubDate));
+                echo "<a href='$noticia->copyright'></a>";
+                echo $noticia->title;
+                echo $noticia->descripcion;
+                echo "----------------------------------------------";
+                echo $noticia->id;
+                echo $noticia->dni;
+                echo $noticia->nombre;
+                echo $noticia->apellido;
+                echo $noticia->correo;
+                echo $noticia->telefono;
+                echo $noticia->usuario;
+                echo $noticia->password;
+            echo "</article>";
+            $num_noticia++;
+            
+            if($num_noticia > $max_noticias){
+                break;
+            }
+        }
     }
 
 }

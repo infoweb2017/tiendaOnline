@@ -1,4 +1,3 @@
-<?php ob_start()?>
 
 <!DOCTYPE html>
 <html><head> <link rel="shortcut icon" href="../web/images/favicon.ico">
@@ -36,7 +35,7 @@
                         <td><?php echo $r->Correo; ?></td>
                         <td><?php echo $r->Telefono; ?></td>
                         <td><?php echo $r->usuario; ?></td>
-                         
+                        
                         <td>
                             <a  class="btn btn-warning" href="?c=cliente&a=CrudCliente&id=<?php echo $r->id; ?>">Actualizar</a>
                         </td>
@@ -52,7 +51,7 @@
                 <tr>
                     <td>
                         <a class="btn btn-primary pull-left" href="?c=cliente&a=verJson">JSON</a>
-                        <a class="btn btn-primary pull-left" href="?c=cliente&a=verRSS">RSS</a>
+                        <a class="btn btn-primary pull-left" type="application/rss+xml" href="?c=cliente&a=verRSS">RSS</a>
                         <a class="btn btn-warning pull-left" href="?c=cliente&a=verCSV">CSV</a>
                     </td>
                 </tr>
@@ -61,10 +60,11 @@
         <hr>
         <div class="imagenes">
             <table style="margin-top: 15">
+                 <h3>Ver distintos tipos ficheros</h3>
                 <tr>
                     <td>
                         <a class="pull-left" href="?c=cliente&a=ver_jsonCliente"><img style="height: 40px; width: 40px;" src="../web/images/json.png"></a>
-                        <a class="pull-left" href="?c=cliente&a=ver_rssCliente"><img style="height: 40px; width: 40px;" src="../web/images/rss.png"></a>
+                        <a class="pull-left" type="application/rss+xml" href="?c=cliente&a=ver_rssCliente"><img style="height: 40px; width: 40px;" src="../web/images/rss.png"></a>
                         <a class="pull-left" href="?c=cliente&a=ver_csvCliente"><img style="height: 40px; width: 40px;" src="../web/images/csv.png"></a>
                     </td>
                 </tr>

@@ -31,12 +31,13 @@ class inicioController{
     }
     public function GuardarNuevoCliente() {
         $cliente = new cliente();
-       
         
         $cliente->usuario  = $_REQUEST['usuario'];
         $cliente->password = $_REQUEST['password'];
-
-
+        
+        if (isset($_REQUEST['id'])) {
+            $cliente = $this->model->ObtenerCl($_REQUEST['id']);
+        }
         $cliente->id > 0 ?: $this->model->RegistrarClusuario($cliente) ;
                  
         header('Location:../index.php');

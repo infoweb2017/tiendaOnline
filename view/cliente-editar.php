@@ -1,5 +1,6 @@
-<!DOCTYPE html>
 
+
+<!DOCTYPE html>
 <html><head><link rel="shortcut icon" href="../web/images/favicon.ico"></head><body>
 <h1 class="page-header">
     <?php echo "<b>".$cliente->id != null ? $cliente->Nombre ."</b>": 'Nuevo Registro'; ?>

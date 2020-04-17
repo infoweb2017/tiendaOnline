@@ -3,66 +3,50 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-require_once 'C:/xampp/htdocs/alumno_2019/frankriescodwsextra/model/cliente.php';
+require_once 'C:/xampp/htdocs/frankriescodwsextra/model/cliente.php';
+require_once 'C:/xampp/htdocs/frankriescodwsextra/model/database.php';
 
-// Elimina caracteres extraños que me pueden molestar en las cadenas que meto en los item de los RSS
-function clrAll($str) {
-    $str = str_replace("&", "&amp;", $str);
-    $str = str_replace("\"", "&quot;", $str);
-    $str = str_replace("'", "&apos;", $str);
-    $str = str_replace(">", "&gt;", $str);
-    $str = str_replace("<", "&lt;", $str);
-    return $str;
-}
+$cliente  = new cliente();
+$result = $cliente->rss();
 
-//creo cabeceras desde PHP para decir que devuelvo un XML
-header("Content-type: text/xml");
+$rss.="<?xml version='1.0' encoding='UTF-8'?>\n";
+$rss.="<rss version='2.0'>\n";
+    $rss.= "<channel>\n";
+    $rss.="<Clientes>\n";
 
-//coneccion a la BD
-$cliente = new cliente();
-
-$result = $cliente->obtener();
-
-echo "<?xml version='1.0' encoding='UTF-8'?>";
-echo "<rss version='2.0'>";
-//Datos generales del Canal
-echo "<channel>";
-echo "<Clientes> ";
-echo "<title>Tabla Clientes</title>";
-echo "<description>Clientes</description>";
-echo "<language>es-ES</language><br>";
-echo "<copyright>CEEDCV.es</copyright>";
-
-while ($data = $result->fetchAll(PDO::FETCH_OBJ)){
-
-    $id = clrAll($data["id"]);
-    $dni = clrAll($data['dni']);
-    $nombre = clrAll($data['Nombre']);
-    $apellido = clrAll($data['Apellido']);
-    $correo = clrAll($data['Correo']);
-    $telefono = clrAll($data['Telefono']);
-    $usuario = clrAll($data['usuario']);
-    $pass = clrAll($data['password']);
-
-   
-    
-    echo "<item>\n";
-    echo "<title></title>\n";
-    echo "<description>";
-        echo "<id>" . $id . "</id>\n";
-        echo "<dni>" . $dni . "</dni>\n";
-        echo "<nombre>" . $nombre . "</nombre>\n";
-        echo "<apellido>" . $apellido . "</apellido>\n";
-        echo "<correo>" . $correo . "</correo>\n";
-        echo "<telefono>" . $telefono . "</telefono>\n";
-        echo "<usuario>" . $usuario . "</usuario>\n";
-        echo "<password>" . $pass . "</password>\n";
-    echo "</description>";
-    echo "</item>";
-}
+        $rss.= "<title>Clientes</title>\n";
+        $rss.= "<description>Tabla Clientes</description>\n";
+        $rss.= "<language>es-ES</language>\n";
+        $rss.= "<copyright>CEEDCV.es</copyright>\n";
+        
+        foreach ($result as $item) {
+            $rss.="--------------'<cliente'>$item->Nombre'</cliente>'----------------\n";
+            $rss.="<item>\n";
+            $rss.= "<id>".$item->id."</id>\n";
+            $rss.= "<dni>".$item->dni."</dni>\n";
+            $rss.= "<nombre>".$item->Nombre."</nombre>\n";
+            $rss.= "<apellido>".$item->Apellido."</apellido>\n";
+            $rss.= "<correo>".$item->Correo."</correo>\n";
+            $rss.= "<telefono>".$item->Telefono."</telefono>\n";
+            $rss.= "<usuario>".$item->usuario."</usuario>\n";
+            $rss.= "<password>".$item->password."</password>\n";
+            $rss.="</item>\n";
+        }
 
 
-echo "</Clientes></rss></channel>";
+$rss.="</Clientes>\n</channel>\n</rss>";
+        
+$file = '../ficheros/cliente.rss';
 
-echo "<a href='../controller/controladorCliente.php'>Volver</a>";
+$fp = fopen($file, 'w');
+fwrite($fp, $rss);
+ob_clean();
+fclose($fp);
+header('Content-Type: text/xml');
+//echo $rss;
+readfile($file);
+
+
+
+
 ?>

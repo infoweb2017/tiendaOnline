@@ -43,7 +43,7 @@ ini_set('display_errors', '1');
                     <li><a href="http://ceedcv.org/">Contacto</a></li>
                     <li><a href="?i=inicio&ac=Salir">Cerrar Sesión</a></li>-->
                     
-                      <li><a href="../controller/controladorCliente.php">Clientes</a></li>
+                    <li><a href="../controller/controladorCliente.php">Clientes</a></li>
                     <li><a href="?i=inicio&ac=documentacion">Documentación</a></li>
                     <li><a href="http://ceedcv.org/">Contacto</a></li>
                     <li><a href="../view/logout.php">Cerrar Sesión</a></li>
