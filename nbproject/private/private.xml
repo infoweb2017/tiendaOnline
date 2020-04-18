@@ -3,13 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="CEEDCV_PHP">
-            <file>file:/C:/xampp/htdocs/frankriescodwsextra/templates/rss_Cliente.php</file>
-            <file>file:/C:/xampp/htdocs/frankriescodwsextra/view/cliente_mostrar.php</file>
             <file>file:/C:/xampp/htdocs/frankriescodwsextra/model/cliente.php</file>
-            <file>file:/C:/xampp/htdocs/frankriescodwsextra/ficheros/cliente.rss</file>
+            <file>file:/C:/xampp/htdocs/frankriescodwsextra/view/cliente-editar.php</file>
+            <file>file:/C:/xampp/htdocs/frankriescodwsextra/controller/controladorCliente.php</file>
             <file>file:/C:/xampp/htdocs/frankriescodwsextra/index.php</file>
-            <file>file:/C:/xampp/htdocs/frankriescodwsextra/templates/json_cliente.php</file>
             <file>file:/C:/xampp/htdocs/frankriescodwsextra/controller/cliente.controller.php</file>
+        </group>
+        <group name="CEEDCV_Java">
+            <file>file:/C:/xampp/htdocs/frankriescodwsextra/model/cliente.php</file>
+            <file>file:/C:/xampp/htdocs/frankriescodwsextra/controller/cliente.controller.php</file>
+            <file>file:/C:/xampp/htdocs/frankriescodwsextra/index.php</file>
+            <file>file:/C:/xampp/htdocs/frankriescodwsextra/view/cliente-editar.php</file>
+            <file>file:/C:/xampp/htdocs/frankriescodwsextra/controller/controladorCliente.php</file>
         </group>
     </open-files>
 </project-private>

@@ -26,9 +26,9 @@ class cliente {
 //Listamos tdos los clientes
     public function ListarCl() {
         try {
-            $stm = $this->pdo->prepare("SELECT * FROM cliente");
-            $stm->execute();
-            return $stm->fetchAll(PDO::FETCH_OBJ);
+            $resultSet = $this->pdo->prepare("SELECT * FROM cliente");
+            $resultSet->execute();
+            return $resultSet->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -37,9 +37,9 @@ class cliente {
 //Obtenemos los clientes por id
     public function ObtenerCl($id) {
         try {
-            $stm = $this->pdo->prepare("SELECT * FROM cliente WHERE id= ? ORDER BY DESC");
-            $stm->execute(array($id));
-            return $stm->fetch(PDO::FETCH_OBJ);
+            $resultSet = $this->pdo->prepare("SELECT * FROM cliente WHERE id= ?");
+            $resultSet->execute(array($id));
+            return $resultSet->fetch(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -104,8 +104,8 @@ class cliente {
 
     public function EliminarCl($id) {
         try {
-            $stm = $this->pdo->prepare("DELETE FROM cliente WHERE id= ?");
-            $stm->execute(array($id));
+            $resultSet = $this->pdo->prepare("DELETE FROM cliente WHERE id= ?");
+            $resultSet->execute(array($id));
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -113,7 +113,7 @@ class cliente {
 
     public function ActualizarCl($data) {
         try {
-            $sql = "UPDATE cliente SET 
+            $consulta = "UPDATE cliente SET 
                         
 			dni        = ?,
 			Nombre     = ?, 
@@ -122,10 +122,9 @@ class cliente {
                         Telefono   = ?,
                         usuario    = ?,
                         password   = ?,
-						
-		    WHERE id = ?";
+		WHERE id= ?";
 
-            $this->pdo->prepare($sql)
+            $this->pdo->prepare($consulta)
                     ->execute(
                             array(
                                 $data->id,
@@ -145,10 +144,10 @@ class cliente {
 
     public function RegistrarClusuario($data) {
         try {
-            $sql = "INSERT INTO cliente (usuario,password) 
+            $consulta = "INSERT INTO cliente (usuario,password) 
 		        VALUES (?, ?)";
 
-            $this->pdo->prepare($sql)
+            $this->pdo->prepare($consulta)
                     ->execute(
                             array(
                                 $data->usuario,
@@ -162,20 +161,20 @@ class cliente {
 
     public function RegistrarCl(cliente $data) {
         try {
-            $sql = "INSERT INTO cliente (id,dni,Nombre,Apellido,Correo,Telefono,usuario,password) 
-		        VALUES (?,?, ?, ?, ?, ?, ?, ?)";
+            $consulta = "INSERT INTO cliente (dni,Nombre,Apellido,Correo,Telefono,usuario,password) 
+		        VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-            $this->pdo->prepare($sql)
+            $this->pdo->prepare($consulta)
                     ->execute(
                             array(
-                                $data->id,
+                                //$data->id,
                                 $data->dni,
                                 $data->Nombre,
                                 $data->Apellido,
                                 $data->Correo,
                                 $data->Telefono,
                                 $data->usuario,
-                                $data->password,
+                                $data->password
                             )
             );
         } catch (Exception $e) {
@@ -184,7 +183,7 @@ class cliente {
     }
 
     public function obtener() {
-        $resultSet = $this->pdo->prepare("SELECT * FROM cliente ORDER BY id DESC");
+        $resultSet = $this->pdo->prepare("SELECT * FROM cliente ORDER BY id");
         $resultSet->execute();
 
         $cliente = array();

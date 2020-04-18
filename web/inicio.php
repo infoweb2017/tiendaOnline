@@ -63,7 +63,7 @@ ini_set('display_errors', '1');
                 <br><font  style='color:darkmagenta'><h3>Bienvenido a nuestra tienda.<br>
                      <b><?=$_SESSION['usuario'];?>
                        
-                    </b></h3></font>
+                </b></h3></font>
             </article>
         </div>
         <div class="imagenes">

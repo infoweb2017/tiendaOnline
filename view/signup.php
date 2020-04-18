@@ -11,7 +11,7 @@ $message = '';
 
 if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['usuario'])) {
     $conexion = Database::conexionDB();
-    $consulta = "INSERT INTO cliente (Correo,password,usuario) VALUES (:email, :password, :usuario)";
+    $consulta = "INSERT INTO cliente (id,Correo,password,usuario) VALUES (:email, :password, :usuario)";
     $statment = $conexion->prepare($consulta);
     
     $statment->bindValue(':email', $_POST['email']);
